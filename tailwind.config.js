@@ -5,17 +5,22 @@ export default {
     extend: {
       colors: {
         surface: {
-          900: '#0d0d0f',
-          800: '#141416',
-          700: '#1c1c1f',
-          600: '#242427',
-          500: '#2e2e32',
-          400: '#3a3a3f',
+          950: '#070812',
+          900: '#090a10',
+          800: '#101124',
+          700: '#171331',
+          600: '#24204a',
+          500: '#373062',
+          400: '#5d5792',
         },
         accent: {
-          DEFAULT: '#7c3aed',
-          hover: '#6d28d9',
-          light: '#a78bfa',
+          DEFAULT: '#18d7d4',
+          hover: '#10bfc0',
+          light: '#78f7f3',
+        },
+        violetglow: {
+          DEFAULT: '#6d28d9',
+          light: '#a855f7',
         },
         green: { midi: '#22c55e' },
       },

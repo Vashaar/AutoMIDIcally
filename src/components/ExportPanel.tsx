@@ -22,7 +22,7 @@ export function ExportPanel({ pattern, onRegenerate, isGenerating }: Props) {
         disabled={isGenerating}
         aria-label="Generate a new pattern variation"
         className={[
-          'flex items-center gap-2 rounded-lg border border-surface-500 bg-surface-700',
+          'flex items-center gap-2 rounded-xl border border-white/10 bg-white/[0.04]',
           'px-4 py-2.5 text-sm font-medium transition-all',
           'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent',
           isGenerating
@@ -40,10 +40,10 @@ export function ExportPanel({ pattern, onRegenerate, isGenerating }: Props) {
         disabled={!canExport}
         aria-label={`Download ${filename}`}
         className={[
-          'flex items-center gap-2 rounded-lg px-4 py-2.5 text-sm font-semibold transition-all',
+          'flex items-center gap-2 rounded-xl px-4 py-2.5 text-sm font-semibold transition-all',
           'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent',
           canExport
-            ? 'bg-accent text-white hover:bg-accent-hover active:scale-[0.98]'
+            ? 'bg-accent text-surface-950 shadow-[0_0_24px_rgba(24,215,212,0.25)] hover:bg-accent-hover active:scale-[0.98]'
             : 'cursor-not-allowed bg-surface-600 text-gray-600',
         ].join(' ')}
       >
@@ -52,7 +52,7 @@ export function ExportPanel({ pattern, onRegenerate, isGenerating }: Props) {
       </button>
 
       {pattern && (
-        <span className="font-mono text-[11px] text-gray-600 sm:ml-1">{filename}</span>
+        <span className="min-w-0 break-all font-mono text-[11px] text-gray-500 sm:ml-1">{filename}</span>
       )}
     </div>
   )

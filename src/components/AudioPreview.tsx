@@ -19,11 +19,11 @@ export function AudioPreview({ pattern, playState, onPlay, onStop }: Props) {
           disabled={disabled}
           aria-label="Play pattern"
           className={[
-            'flex h-10 w-10 items-center justify-center rounded-full transition-all',
+            'flex h-11 w-11 items-center justify-center rounded-full transition-all',
             'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent',
             disabled
-              ? 'cursor-not-allowed bg-surface-600 text-gray-600'
-              : 'bg-accent text-white hover:bg-accent-hover active:scale-95',
+              ? 'cursor-not-allowed bg-surface-600 text-gray-500'
+              : 'bg-accent text-surface-950 shadow-[0_0_24px_rgba(24,215,212,0.25)] hover:bg-accent-hover active:scale-95',
           ].join(' ')}
         >
           <PlayIcon />
@@ -32,7 +32,7 @@ export function AudioPreview({ pattern, playState, onPlay, onStop }: Props) {
         <button
           disabled
           aria-label="Loading audio"
-          className="flex h-10 w-10 items-center justify-center rounded-full bg-surface-600"
+          className="flex h-11 w-11 items-center justify-center rounded-full bg-surface-600"
         >
           <span className="h-4 w-4 animate-spin rounded-full border-2 border-gray-500 border-t-accent" />
         </button>
@@ -40,28 +40,28 @@ export function AudioPreview({ pattern, playState, onPlay, onStop }: Props) {
         <button
           onClick={onStop}
           aria-label="Stop playback"
-          className="flex h-10 w-10 items-center justify-center rounded-full bg-red-600/80
-            text-white transition-all hover:bg-red-600 active:scale-95
-            focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-500"
+          className="flex h-11 w-11 items-center justify-center rounded-full bg-violetglow-light/85
+            text-white transition-all hover:bg-violetglow-light active:scale-95
+            focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violetglow-light"
         >
           <StopIcon />
         </button>
       )}
 
       <div className="flex flex-col">
-        <span className="text-sm font-medium text-gray-300">
+        <span className="text-sm font-semibold text-gray-100">
           {playState === 'playing' ? (
             <span className="flex items-center gap-1.5">
-              <span className="inline-block h-2 w-2 animate-pulse rounded-full bg-green-400" />
-              Playing…
+              <span className="inline-block h-2 w-2 animate-pulse rounded-full bg-accent" />
+              Playing...
             </span>
           ) : playState === 'loading' ? (
-            'Loading audio engine…'
+            'Loading audio engine...'
           ) : (
             'Preview'
           )}
         </span>
-        <span className="text-xs text-gray-600">Tone.js in-browser synth</span>
+        <span className="text-xs text-gray-500">Tone.js local audio engine</span>
       </div>
     </div>
   )

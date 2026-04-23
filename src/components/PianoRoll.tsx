@@ -26,16 +26,16 @@ const NOTE_BORDER_RADIUS = 3
 // Pitch range for melodic patterns (show a window around the notes)
 // GM drum voices to show, in display order (top = highest on grid)
 const DRUM_ROWS = [
-  { pitch: GM_DRUM.CRASH,        label: 'Crash',  color: '#818cf8' },
-  { pitch: GM_DRUM.OPEN_HIHAT,   label: 'O.Hat',  color: '#a78bfa' },
-  { pitch: GM_DRUM.CLOSED_HIHAT, label: 'C.Hat',  color: '#7c3aed' },
-  { pitch: GM_DRUM.RIDE,         label: 'Ride',   color: '#6d28d9' },
-  { pitch: GM_DRUM.CLAP,         label: 'Clap',   color: '#f472b6' },
-  { pitch: GM_DRUM.SNARE,        label: 'Snare',  color: '#fb923c' },
-  { pitch: GM_DRUM.TOM_HIGH,     label: 'Tom H',  color: '#4ade80' },
-  { pitch: GM_DRUM.TOM_MID,      label: 'Tom M',  color: '#34d399' },
-  { pitch: GM_DRUM.TOM_LOW,      label: 'Tom L',  color: '#2dd4bf' },
-  { pitch: GM_DRUM.KICK,         label: 'Kick',   color: '#f87171' },
+  { pitch: GM_DRUM.CRASH,        label: 'Crash',  color: '#78f7f3' },
+  { pitch: GM_DRUM.OPEN_HIHAT,   label: 'O.Hat',  color: '#18d7d4' },
+  { pitch: GM_DRUM.CLOSED_HIHAT, label: 'C.Hat',  color: '#10bfc0' },
+  { pitch: GM_DRUM.RIDE,         label: 'Ride',   color: '#a855f7' },
+  { pitch: GM_DRUM.CLAP,         label: 'Clap',   color: '#c084fc' },
+  { pitch: GM_DRUM.SNARE,        label: 'Snare',  color: '#8b5cf6' },
+  { pitch: GM_DRUM.TOM_HIGH,     label: 'Tom H',  color: '#67e8f9' },
+  { pitch: GM_DRUM.TOM_MID,      label: 'Tom M',  color: '#22d3ee' },
+  { pitch: GM_DRUM.TOM_LOW,      label: 'Tom L',  color: '#06b6d4' },
+  { pitch: GM_DRUM.KICK,         label: 'Kick',   color: '#6d28d9' },
 ]
 
 // Piano key colors for the left-side piano guide
@@ -69,15 +69,15 @@ export function PianoRoll({ pattern, isGenerating }: Props) {
 
   if (isGenerating) {
     return (
-      <div className="flex h-40 items-center justify-center rounded-xl border border-surface-500 bg-surface-800">
-        <span className="animate-pulse text-sm text-gray-500">Generating…</span>
+      <div className="flex h-40 items-center justify-center rounded-2xl border border-accent/20 bg-white/[0.03]">
+        <span className="animate-pulse text-sm text-accent">Generating...</span>
       </div>
     )
   }
 
   if (!pattern || pattern.notes.length === 0) {
     return (
-      <div className="flex h-40 items-center justify-center rounded-xl border border-dashed border-surface-500 bg-surface-800">
+      <div className="flex h-40 items-center justify-center rounded-2xl border border-dashed border-accent/20 bg-white/[0.03]">
         <span className="text-sm text-gray-600">No pattern generated yet</span>
       </div>
     )
@@ -85,11 +85,11 @@ export function PianoRoll({ pattern, isGenerating }: Props) {
 
   return (
     <div className="flex flex-col gap-2">
-      <h2 className="text-xs font-semibold uppercase tracking-widest text-gray-500">
+      <h2 className="text-xs font-semibold uppercase tracking-[0.24em] text-accent/70">
         Piano Roll Preview
       </h2>
       <div
-        className="overflow-x-auto rounded-xl border border-surface-500 bg-surface-800"
+        className="overflow-x-auto rounded-2xl border border-white/10 bg-surface-950/70"
         style={{ maxHeight: '280px' }}
       >
         <div className="relative flex" style={{ minWidth: totalWidth + PIANO_KEY_WIDTH }}>
@@ -149,7 +149,7 @@ function MelodicGrid({
             key={pitch}
             x={0} y={y}
             width={totalWidth} height={rowHeight}
-            fill={black ? '#1a1a1f' : '#18181c'}
+            fill={black ? '#11122a' : '#0d1022'}
           />
         )
       })}
@@ -160,7 +160,7 @@ function MelodicGrid({
           key={beat}
           x1={beat * 480 * PIXELS_PER_TICK} x2={beat * 480 * PIXELS_PER_TICK}
           y1={0} y2={height}
-          stroke={beat % 4 === 0 ? '#3a3a3f' : '#242427'}
+          stroke={beat % 4 === 0 ? '#18d7d480' : '#373062'}
           strokeWidth={beat % 4 === 0 ? 1.5 : 0.5}
         />
       ))}
@@ -178,7 +178,7 @@ function MelodicGrid({
             key={i}
             x={x} y={y} width={w} height={h}
             rx={NOTE_BORDER_RADIUS}
-            fill={`rgba(124,58,237,${opacity})`}
+            fill={`rgba(24,215,212,${opacity})`}
           />
         )
       })}
@@ -203,7 +203,7 @@ function DrumGrid({ pattern, totalWidth }: { pattern: GeneratedPattern; totalWid
         return (
           <g key={pitch}>
             <rect x={0} y={y} width={totalWidth} height={ROW_HEIGHT}
-              fill={rowIdx % 2 === 0 ? '#16161a' : '#18181c'} />
+              fill={rowIdx % 2 === 0 ? '#0d1022' : '#11122a'} />
             {(notesByPitch.get(pitch) ?? []).map((note, i) => {
               const x = note.startTick * PIXELS_PER_TICK
               const w = Math.max(4, ROW_HEIGHT - 2)
@@ -226,7 +226,7 @@ function DrumGrid({ pattern, totalWidth }: { pattern: GeneratedPattern; totalWid
         <line key={beat}
           x1={beat * 480 * PIXELS_PER_TICK} x2={beat * 480 * PIXELS_PER_TICK}
           y1={0} y2={height}
-          stroke={beat % 4 === 0 ? '#3a3a3f' : '#1e1e22'}
+          stroke={beat % 4 === 0 ? '#18d7d480' : '#373062'}
           strokeWidth={beat % 4 === 0 ? 1.5 : 0.5}
         />
       ))}
@@ -283,4 +283,3 @@ function DrumLabels() {
     </div>
   )
 }
-

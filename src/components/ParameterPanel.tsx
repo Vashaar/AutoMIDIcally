@@ -13,12 +13,12 @@ interface Props {
 const VIBES: VibeName[] = ['Cinematic', 'Lo-fi', 'Hyperpop', 'Afrobeats', 'Jazz', 'Dark Trap']
 
 const VIBE_COLORS: Record<VibeName, string> = {
-  Cinematic:   'from-blue-900/40 to-purple-900/40 border-blue-700/50',
-  'Lo-fi':     'from-amber-900/40 to-orange-900/40 border-amber-700/50',
-  Hyperpop:    'from-pink-900/40 to-fuchsia-900/40 border-pink-700/50',
-  Afrobeats:   'from-green-900/40 to-teal-900/40 border-green-700/50',
-  Jazz:        'from-yellow-900/40 to-amber-900/40 border-yellow-700/50',
-  'Dark Trap': 'from-gray-900/40 to-zinc-900/40 border-gray-600/50',
+  Cinematic: 'from-violet-900/50 to-cyan-900/30 border-accent/50',
+  'Lo-fi': 'from-violet-900/40 to-fuchsia-900/30 border-violetglow-light/50',
+  Hyperpop: 'from-fuchsia-900/50 to-cyan-900/30 border-accent/50',
+  Afrobeats: 'from-cyan-900/40 to-emerald-900/30 border-accent/50',
+  Jazz: 'from-violet-900/40 to-sky-900/30 border-violetglow-light/50',
+  'Dark Trap': 'from-surface-800 to-violet-950/60 border-surface-400/50',
 }
 
 export function ParameterPanel({
@@ -26,7 +26,7 @@ export function ParameterPanel({
 }: Props) {
   return (
     <div className="flex flex-col gap-5">
-      <h2 className="text-xs font-semibold uppercase tracking-widest text-gray-500">
+      <h2 className="text-xs font-semibold uppercase tracking-[0.24em] text-accent/70">
         Parameters
       </h2>
 
@@ -39,8 +39,8 @@ export function ParameterPanel({
           id="key-select"
           value={params.key.label}
           onChange={e => onKeyChange(e.target.value)}
-          className="rounded-lg border border-surface-500 bg-surface-700 px-3 py-2 text-sm
-            text-gray-200 focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent"
+          className="rounded-xl border border-white/10 bg-white/[0.04] px-3 py-2.5 text-sm
+            text-gray-100 focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent"
         >
           {ALL_KEYS.map(k => (
             <option key={k.label} value={k.label}>{k.label}</option>
@@ -87,7 +87,7 @@ export function ParameterPanel({
       {/* ── Vibe presets */}
       <div className="flex flex-col gap-1.5">
         <span className="text-sm font-medium text-gray-300">Vibe</span>
-        <div className="grid grid-cols-3 gap-1.5 sm:grid-cols-6">
+        <div className="grid grid-cols-2 gap-2">
           {VIBES.map(vibe => {
             const active = params.vibe === vibe
             return (
@@ -96,11 +96,11 @@ export function ParameterPanel({
                 onClick={() => onVibeChange(vibe)}
                 aria-pressed={active}
                 className={[
-                  'rounded-lg border bg-gradient-to-br px-2 py-2 text-xs font-medium transition-all',
+                  'rounded-xl border bg-gradient-to-br px-2 py-2.5 text-xs font-semibold transition-all',
                   'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent',
                   active
                     ? `${VIBE_COLORS[vibe]} text-white`
-                    : 'border-surface-500 bg-surface-700 bg-none text-gray-400 hover:text-gray-200',
+                    : 'border-white/10 bg-white/[0.035] bg-none text-gray-400 hover:border-accent/30 hover:text-gray-100',
                 ].join(' ')}
               >
                 {vibe}
@@ -131,7 +131,7 @@ function SliderField({ id, label, value, min, max, step, displayValue, onChange 
     <div className="flex flex-col gap-1.5">
       <div className="flex items-center justify-between">
         <label htmlFor={id} className="text-sm font-medium text-gray-300">{label}</label>
-        <span className="font-mono text-sm text-accent">{displayValue}</span>
+        <span className="rounded-full bg-accent/10 px-2 py-0.5 font-mono text-sm font-semibold text-accent">{displayValue}</span>
       </div>
       <input
         id={id}

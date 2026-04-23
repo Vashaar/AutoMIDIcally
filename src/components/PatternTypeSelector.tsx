@@ -5,21 +5,21 @@ interface Props {
   onChange: (type: PatternType) => void
 }
 
-const PATTERN_TYPES: { type: PatternType; label: string; icon: string; description: string }[] = [
-  { type: 'melody',  label: 'Melody',     icon: '♩', description: 'Single-line melodic phrase' },
-  { type: 'chords',  label: 'Chords',     icon: '♦', description: 'Diatonic chord progression' },
-  { type: 'drums',   label: 'Drums',      icon: '◉', description: '16-step GM drum pattern' },
-  { type: 'bass',    label: 'Bass Line',  icon: '▬', description: 'Root-driven bass groove' },
+const PATTERN_TYPES: { type: PatternType; label: string; description: string }[] = [
+  { type: 'melody', label: 'Melody', description: 'Single-line melodic phrase' },
+  { type: 'chords', label: 'Chords', description: 'Diatonic chord progression' },
+  { type: 'drums', label: 'Drums', description: '16-step GM drum pattern' },
+  { type: 'bass', label: 'Bass', description: 'Root-driven bass groove' },
 ]
 
 export function PatternTypeSelector({ value, onChange }: Props) {
   return (
-    <div className="flex flex-col gap-2">
-      <h2 className="text-xs font-semibold uppercase tracking-widest text-gray-500">
+    <div className="flex flex-col gap-3">
+      <h2 className="text-xs font-semibold uppercase tracking-[0.24em] text-accent/70">
         Pattern Type
       </h2>
-      <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
-        {PATTERN_TYPES.map(({ type, label, icon, description }) => {
+      <div className="grid grid-cols-2 gap-2">
+        {PATTERN_TYPES.map(({ type, label, description }) => {
           const active = value === type
           return (
             <button
@@ -28,21 +28,59 @@ export function PatternTypeSelector({ value, onChange }: Props) {
               aria-pressed={active}
               title={description}
               className={[
-                'flex flex-col items-center gap-1.5 rounded-xl border px-3 py-3',
-                'text-sm font-medium transition-all duration-150 focus-visible:outline-none',
-                'focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2',
-                'focus-visible:ring-offset-surface-800',
+                'group flex min-h-24 flex-col justify-between rounded-2xl border p-3 text-left',
+                'transition-all duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent',
                 active
-                  ? 'border-accent bg-accent/10 text-accent'
-                  : 'border-surface-500 bg-surface-700 text-gray-400 hover:border-accent/40 hover:text-gray-200',
+                  ? 'border-accent bg-accent/15 text-white shadow-[0_0_24px_rgba(24,215,212,0.18)]'
+                  : 'border-white/10 bg-white/[0.035] text-gray-400 hover:border-accent/40 hover:text-gray-100',
               ].join(' ')}
             >
-              <span className="text-xl leading-none">{icon}</span>
-              <span>{label}</span>
+              <PatternIcon type={type} active={active} />
+              <span className="text-sm font-bold">{label}</span>
             </button>
           )
         })}
       </div>
     </div>
+  )
+}
+
+function PatternIcon({ type, active }: { type: PatternType; active: boolean }) {
+  const color = active ? 'text-accent' : 'text-violet-300/70 group-hover:text-accent'
+  const common = `h-7 w-7 ${color}`
+
+  if (type === 'melody') {
+    return (
+      <svg viewBox="0 0 32 32" fill="none" className={common}>
+        <path d="M8 22c5-15 8 11 12-8 2-9 4-3 4-3" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" />
+        <circle cx="7" cy="23" r="3" fill="currentColor" />
+      </svg>
+    )
+  }
+
+  if (type === 'chords') {
+    return (
+      <svg viewBox="0 0 32 32" fill="none" className={common}>
+        <rect x="5" y="9" width="7" height="16" rx="2" stroke="currentColor" strokeWidth="2" />
+        <rect x="13" y="5" width="7" height="20" rx="2" stroke="currentColor" strokeWidth="2" />
+        <rect x="21" y="12" width="6" height="13" rx="2" stroke="currentColor" strokeWidth="2" />
+      </svg>
+    )
+  }
+
+  if (type === 'drums') {
+    return (
+      <svg viewBox="0 0 32 32" fill="none" className={common}>
+        <circle cx="16" cy="16" r="9" stroke="currentColor" strokeWidth="2.5" />
+        <path d="M9 9 5 5M23 9l4-4M12 16h8" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" />
+      </svg>
+    )
+  }
+
+  return (
+    <svg viewBox="0 0 32 32" fill="none" className={common}>
+      <path d="M9 7v18M16 11v14M23 5v20" stroke="currentColor" strokeWidth="3" strokeLinecap="round" />
+      <path d="M7 25h18" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" />
+    </svg>
   )
 }
