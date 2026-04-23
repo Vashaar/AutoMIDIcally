@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="public/logo.png" alt="AutoMIDIcally logo" width="80" />
+  <img src="public/logo-v2.png" alt="AutoMIDIcally logo" width="120" />
 </p>
 
 <h1 align="center">AutoMIDIcally</h1>
