@@ -24,7 +24,7 @@ export default function App() {
       {/* ── Header */}
       <header className="border-b border-surface-600 bg-surface-800/80 backdrop-blur-sm">
         <div className="mx-auto flex max-w-5xl items-center gap-3 px-4 py-3 sm:px-6">
-          <img src="/logo.png" alt="AutoMIDIcally logo" className="h-9 w-9 rounded-lg object-cover" />
+          <img src="/logo-v2.png" alt="AutoMIDIcally logo" className="h-9 w-9 rounded-lg object-cover" />
           <div>
             <h1 className="text-lg font-bold leading-tight tracking-tight text-white">
               AutoMIDIcally
