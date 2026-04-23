@@ -1,0 +1,74 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+
+  html {
+    color-scheme: dark;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-surface-900 text-gray-100 antialiased;
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+
+  /* Custom range slider */
+  input[type='range'] {
+    -webkit-appearance: none;
+    appearance: none;
+  }
+
+  input[type='range']::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: #7c3aed;
+    cursor: pointer;
+    border: 2px solid #0d0d0f;
+    box-shadow: 0 0 0 1px #7c3aed40;
+  }
+
+  input[type='range']::-moz-range-thumb {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: #7c3aed;
+    cursor: pointer;
+    border: 2px solid #0d0d0f;
+  }
+
+  input[type='range']::-webkit-slider-runnable-track {
+    background: #2e2e32;
+    height: 6px;
+    border-radius: 3px;
+  }
+
+  input[type='range']::-moz-range-track {
+    background: #2e2e32;
+    height: 6px;
+    border-radius: 3px;
+  }
+
+  /* Scrollbar styling for piano roll */
+  ::-webkit-scrollbar {
+    height: 6px;
+    width: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #141416;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #3a3a3f;
+    border-radius: 3px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #7c3aed;
+  }
+}
